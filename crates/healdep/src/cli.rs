@@ -27,4 +27,3 @@ pub enum Commands {
         use_ai: bool,
     },
 }
-
