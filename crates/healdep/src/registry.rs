@@ -26,4 +26,3 @@ pub async fn search_registry(crate_name: &str) -> Option<String> {
     }
     None
 }
-
