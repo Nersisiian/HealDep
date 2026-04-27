@@ -1,0 +1,41 @@
+﻿name: Auto-Heal with HealDep
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  heal:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: 1.86.0
+        override: true
+    
+    - name: Install HealDep (latest release)
+      run: |
+        cargo install healdep || echo "healdep будет собран из исходников ниже"
+    
+    - name: Run HealDep for Cargo
+      run: |
+        if [ -f Cargo.toml ]; then
+          healdep heal --ai || true
+        fi
+    
+    - name: Run HealDep for npm
+      run: |
+        if [ -f package.json ]; then
+          python python/healdep_npm.py heal package.json || true
+        fi
+    
+    - name: Commit healed files
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "🤖 HealDep: автоматическое лечение зависимостей"
+        file_pattern: 'healed_shims/** healed_shims_py/** healed_shims_npm/**'

@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>HealDep Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🩺 HealDep</h1>
+    <p>Первый в мире самоисцеляющийся пакетный менеджер</p>
+
+    <div class="upload-card">
+        <input type="file" id="fileInput" accept=".txt" style="margin-bottom:1rem;">
+        <div style="gap:1rem; display:flex; align-items:center;">
+            <button class="btn" id="analyzeBtn">🔍 Анализировать</button>
+            <button class="btn danger" id="healBtn">💊 Лечить</button>
+            <label style="margin-left:1rem;">
+                <input type="checkbox" id="useAiCheckbox"> Использовать AI
+            </label>
+        </div>
+        <div id="status" class="status"></div>
+    </div>
+
+    <div class="upload-card" style="margin-top:2rem;">
+        <h2>📜 История лечений</h2>
+        <div id="historyTable"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+﻿requests==2.25.1
+flask==2.0.1
+click==7.0
+click==8.0

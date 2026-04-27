@@ -1,0 +1,13 @@
+﻿[workspace]
+resolver = "2"
+members = [
+    "crates/healdep",
+    "crates/healdep-synthesizer",
+    "crates/healdep-sandbox",
+    "crates/healdep-registry",
+]
+exclude = ["examples"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"

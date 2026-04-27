@@ -1,0 +1,10 @@
+[dependencies.crate_a]
+path = "crate_a"
+
+[dependencies.crate_b]
+path = "crate_b"
+
+[package]
+edition = "2021"
+name = "demo_app"
+version = "0.1.0"

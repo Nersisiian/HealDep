@@ -1,0 +1,9 @@
+[package]
+name = "demo_app"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Предположим, crate_a требует uuid 0.8, crate_b требует uuid 1.0
+crate_a = "0.1.0"   # зависит от uuid = "0.8"
+crate_b = "0.1.0"   # зависит от uuid = "1.0"

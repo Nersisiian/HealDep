@@ -1,0 +1,13 @@
+﻿# healdep.toml – конфигурация AI-провайдера для HealDep
+
+[ai]
+# Провайдер: "ollama" или "openai"
+provider = "ollama"
+# Для Ollama (локально)
+ollama_url = "http://localhost:11434/api/generate"
+ollama_model = "codellama:7b"   # или другая модель
+# Для OpenAI
+# openai_api_key = "sk-..."
+# openai_model = "gpt-4o"
+max_tokens = 2048
+temperature = 0.2

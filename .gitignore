@@ -1,0 +1,8 @@
+﻿.venv/
+target/
+__pycache__/
+*.pyc
+healed_shims/
+healed_shims_py/
+healed_shims_npm/
+.DS_Store

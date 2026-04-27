@@ -1,0 +1,16 @@
+﻿{
+    "name": "healdep-vscode",
+    "displayName": "HealDep",
+    "version": "0.1.0",
+    "publisher": "healdep",
+    "engines": { "vscode": "^1.90.0" },
+    "categories": ["Other"],
+    "activationEvents": ["onLanguage:rust","onLanguage:python","onLanguage:json"],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [{
+            "command": "healdep.healCurrentFile",
+            "title": "HealDep: Вылечить этот проект"
+        }]
+    }
+}
