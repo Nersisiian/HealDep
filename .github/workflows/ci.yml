@@ -22,7 +22,7 @@ jobs:
     - name: Установка Rust
       uses: actions-rs/toolchain@v1.0.6
       with:
-        toolchain: 1.85.0
+        toolchain: 1.86.0
         override: true
         components: rustfmt, clippy
 
@@ -91,3 +91,4 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+

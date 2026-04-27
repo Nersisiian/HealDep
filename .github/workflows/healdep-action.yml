@@ -39,3 +39,4 @@ jobs:
       with:
         commit_message: "🤖 HealDep: автоматическое лечение зависимостей"
         file_pattern: 'healed_shims/** healed_shims_py/** healed_shims_npm/**'
+
