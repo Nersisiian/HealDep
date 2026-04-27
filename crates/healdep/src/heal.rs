@@ -1,14 +1,14 @@
-﻿use std::path::{Path};
-use std::fs;
-use anyhow::{Context, Result};
-use indicatif::ProgressBar;
-use console::style;
-use healdep_synthesizer::{generate_shim, generate_shim_ai, ConflictInfo};
-use healdep_sandbox::{test_build, run_tests};
 use crate::analyze::{detect_conflicts, Conflict};
-use crate::ui;
-use crate::registry::search_registry;
 use crate::config::load_config;
+use crate::registry::search_registry;
+use crate::ui;
+use anyhow::{Context, Result};
+use console::style;
+use healdep_sandbox::{run_tests, test_build};
+use healdep_synthesizer::{generate_shim, generate_shim_ai, ConflictInfo};
+use indicatif::ProgressBar;
+use std::fs;
+use std::path::Path;
 
 const MAX_AI_RETRIES: u32 = 3;
 
@@ -37,8 +37,14 @@ pub async fn run(manifest_path: &str, crate_name: Option<&str>, use_ai: bool) ->
     }
 
     let ai_config = if use_ai {
-        Some(load_config().context("Не удалось загрузить healdep.toml. Убедитесь, что файл существует и заполнен.")?
-            .ai.ok_or_else(|| anyhow::anyhow!("Секция [ai] отсутствует в healdep.toml"))?)
+        Some(
+            load_config()
+                .context(
+                    "Не удалось загрузить healdep.toml. Убедитесь, что файл существует и заполнен.",
+                )?
+                .ai
+                .ok_or_else(|| anyhow::anyhow!("Секция [ai] отсутствует в healdep.toml"))?,
+        )
     } else {
         None
     };
@@ -66,14 +72,24 @@ pub async fn run(manifest_path: &str, crate_name: Option<&str>, use_ai: bool) ->
 
         // Проверяем реестр сначала
         if let Some(existing) = search_registry(&info.crate_name).await {
-            println!("{}", style(format!("📦 Найдено готовое решение в реестре: {}", existing)).green());
+            println!(
+                "{}",
+                style(format!(
+                    "📦 Найдено готовое решение в реестре: {}",
+                    existing
+                ))
+                .green()
+            );
             // здесь мы бы скачали shim, но пока просто помечаем
         }
         let shim = if let Some(ref ai_cfg) = ai_config {
             let mut attempts = 0;
             let mut shim = None;
             while attempts < MAX_AI_RETRIES {
-                let ai_spin = ui::spinner(&format!("🧠 AI генерирует адаптер (попытка {})...", attempts+1));
+                let ai_spin = ui::spinner(&format!(
+                    "🧠 AI генерирует адаптер (попытка {})...",
+                    attempts + 1
+                ));
                 match generate_shim_ai(&info, ai_cfg).await {
                     Ok(s) => {
                         // Создаём временный проект с shim и проверяем сборку + тесты
@@ -86,7 +102,11 @@ pub async fn run(manifest_path: &str, crate_name: Option<&str>, use_ai: bool) ->
                         if test_build(&tmp_dir).is_ok() {
                             // Если есть тесты, запускаем
                             if let Err(e) = run_tests(&tmp_dir) {
-                                ui::finish_spinner(&ai_spin, false, &format!("AI-адаптер не прошёл тесты: {}. Повтор...", e));
+                                ui::finish_spinner(
+                                    &ai_spin,
+                                    false,
+                                    &format!("AI-адаптер не прошёл тесты: {}. Повтор...", e),
+                                );
                                 attempts += 1;
                                 continue;
                             }
@@ -94,12 +114,20 @@ pub async fn run(manifest_path: &str, crate_name: Option<&str>, use_ai: bool) ->
                             shim = Some(s);
                             break;
                         } else {
-                            ui::finish_spinner(&ai_spin, false, "AI-адаптер не компилируется. Повтор...");
+                            ui::finish_spinner(
+                                &ai_spin,
+                                false,
+                                "AI-адаптер не компилируется. Повтор...",
+                            );
                             attempts += 1;
                         }
-                    },
+                    }
                     Err(e) => {
-                        ui::finish_spinner(&ai_spin, false, &format!("AI-ошибка: {}. Повтор...", e));
+                        ui::finish_spinner(
+                            &ai_spin,
+                            false,
+                            &format!("AI-ошибка: {}. Повтор...", e),
+                        );
                         attempts += 1;
                     }
                 }
@@ -107,7 +135,11 @@ pub async fn run(manifest_path: &str, crate_name: Option<&str>, use_ai: bool) ->
             match shim {
                 Some(s) => s,
                 None => {
-                    println!("{}", style("⚠️  AI не смог создать работающий адаптер. Использую базовый.").yellow());
+                    println!(
+                        "{}",
+                        style("⚠️  AI не смог создать работающий адаптер. Использую базовый.")
+                            .yellow()
+                    );
                     generate_shim(&info)?
                 }
             }
@@ -144,7 +176,10 @@ pub async fn run(manifest_path: &str, crate_name: Option<&str>, use_ai: bool) ->
     match test_build(project_dir) {
         Ok(_) => {
             ui::finish_spinner(&build_spin, true, "Проект успешно собирается после лечения");
-            println!("{}", style("✅ HealDep вылечил все конфликты!").green().bold());
+            println!(
+                "{}",
+                style("✅ HealDep вылечил все конфликты!").green().bold()
+            );
         }
         Err(e) => {
             ui::finish_spinner(&build_spin, false, "Сборка провалилась");
@@ -154,4 +189,3 @@ pub async fn run(manifest_path: &str, crate_name: Option<&str>, use_ai: bool) ->
     }
     Ok(())
 }
-

@@ -1,4 +1,4 @@
-﻿use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
 #[command(name = "healdep", about = "Self-healing package manager with AI")]
@@ -27,4 +27,3 @@ pub enum Commands {
         use_ai: bool,
     },
 }
-

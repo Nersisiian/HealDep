@@ -1,5 +1,5 @@
-﻿use std::process::Command;
 use std::path::Path;
+use std::process::Command;
 
 pub fn test_build(project_dir: &Path) -> anyhow::Result<()> {
     let output = Command::new("cargo")

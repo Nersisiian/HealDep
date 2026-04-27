@@ -1,7 +1,7 @@
-﻿use serde::{Serialize, Deserialize};
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use std::future::Future;
 use std::pin::Pin;
-use anyhow::Result;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ConflictInfo {
@@ -17,9 +17,10 @@ pub struct ShimCrate {
 }
 
 pub fn generate_shim(conflict: &ConflictInfo) -> Result<ShimCrate> {
-    let name = format!("heal_{}_{}_{}", 
-        conflict.crate_name, 
-        conflict.version_a.replace('.', "_"), 
+    let name = format!(
+        "heal_{}_{}_{}",
+        conflict.crate_name,
+        conflict.version_a.replace('.', "_"),
         conflict.version_b.replace('.', "_")
     );
 
@@ -48,14 +49,22 @@ pub mod unified {{
         conflict.crate_name, conflict.version_a, conflict.crate_name, conflict.version_b
     );
 
-    Ok(ShimCrate { name, manifest, lib_rs })
+    Ok(ShimCrate {
+        name,
+        manifest,
+        lib_rs,
+    })
 }
 
 pub trait AiGenerator {
-    fn generate(&self, prompt: String) -> Pin<Box<dyn Future<Output = Result<String>> + Send + '_>>;
+    fn generate(&self, prompt: String)
+        -> Pin<Box<dyn Future<Output = Result<String>> + Send + '_>>;
 }
 
-pub async fn generate_shim_ai(conflict: &ConflictInfo, ai_config: &dyn AiGenerator) -> Result<ShimCrate> {
+pub async fn generate_shim_ai(
+    conflict: &ConflictInfo,
+    ai_config: &dyn AiGenerator,
+) -> Result<ShimCrate> {
     let prompt = format!(
         "You are an expert Rust developer. A project has two conflicting versions of '{}': {} and {}. \
         Generate a Rust library (shim crate) that re-exports the API of the older version and adapts the newer version's calls to it. \
@@ -64,7 +73,8 @@ pub async fn generate_shim_ai(conflict: &ConflictInfo, ai_config: &dyn AiGenerat
         conflict.crate_name, conflict.version_a, conflict.version_b
     );
     let ai_code = ai_config.generate(prompt).await?;
-    let name = format!("heal_{}_{}_{}",
+    let name = format!(
+        "heal_{}_{}_{}",
         conflict.crate_name,
         conflict.version_a.replace('.', "_"),
         conflict.version_b.replace('.', "_")

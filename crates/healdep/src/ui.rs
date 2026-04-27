@@ -1,10 +1,20 @@
-﻿use console::{style, Term};
+use console::{style, Term};
 use indicatif::{ProgressBar, ProgressStyle};
 
 pub fn print_banner() {
     let _ = Term::stdout().clear_screen();
-    println!("{}", style("🩺  HealDep – Self‑Healing Package Manager").bold().green());
-    println!("{}", style("Первый в мире менеджер, самостоятельно лечащий конфликты зависимостей").dim().italic());
+    println!(
+        "{}",
+        style("🩺  HealDep – Self‑Healing Package Manager")
+            .bold()
+            .green()
+    );
+    println!(
+        "{}",
+        style("Первый в мире менеджер, самостоятельно лечащий конфликты зависимостей")
+            .dim()
+            .italic()
+    );
     println!();
 }
 
@@ -22,7 +32,11 @@ pub fn spinner(msg: &str) -> ProgressBar {
 
 pub fn finish_spinner(pb: &ProgressBar, success: bool, final_msg: &str) {
     pb.finish_and_clear();
-    let icon = if success { style("✔").green().bold() } else { style("✖").red().bold() };
+    let icon = if success {
+        style("✔").green().bold()
+    } else {
+        style("✖").red().bold()
+    };
     println!("{} {}", icon, final_msg);
 }
 

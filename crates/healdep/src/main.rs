@@ -1,11 +1,11 @@
-﻿mod cli;
-mod analyze;
-mod heal;
-mod ui;
-mod config;
 mod ai;
-mod registry;
+mod analyze;
+mod cli;
+mod config;
+mod heal;
 mod init;
+mod registry;
+mod ui;
 
 use clap::Parser;
 use cli::{Cli, Commands};
@@ -17,11 +17,11 @@ async fn main() -> anyhow::Result<()> {
     match cli.command {
         Commands::Init { project_dir } => init::run(&project_dir)?,
         Commands::Analyze { manifest_path } => analyze::run(&manifest_path)?,
-        Commands::Heal { manifest_path, crate_name, use_ai } => {
-            heal::run(&manifest_path, crate_name.as_deref(), use_ai).await?
-        },
+        Commands::Heal {
+            manifest_path,
+            crate_name,
+            use_ai,
+        } => heal::run(&manifest_path, crate_name.as_deref(), use_ai).await?,
     }
     Ok(())
 }
-
-
