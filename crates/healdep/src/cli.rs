@@ -1,4 +1,4 @@
-use clap::{Parser, Subcommand};
+﻿use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
 #[command(name = "healdep", about = "Self-healing package manager with AI")]
@@ -10,7 +10,7 @@ pub struct Cli {
 #[derive(Subcommand)]
 pub enum Commands {
     Init {
-        #[arg(default_value = .)]
+        #[arg(default_value = ".")]
         project_dir: String,
     },
     Analyze {
@@ -22,8 +22,9 @@ pub enum Commands {
         manifest_path: String,
         #[arg(short, long)]
         crate_name: Option<String>,
-        /// Включить AI-генерацию адаптера (требует healdep.toml)
+        /// Р’РєР»СЋС‡РёС‚СЊ AI-РіРµРЅРµСЂР°С†РёСЋ Р°РґР°РїС‚РµСЂР° (С‚СЂРµР±СѓРµС‚ healdep.toml)
         #[arg(short = 'a', long = "ai")]
         use_ai: bool,
     },
 }
+

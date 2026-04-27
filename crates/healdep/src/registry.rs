@@ -1,5 +1,4 @@
-use reqwest;
-use serde::Deserialize;
+﻿use serde::Deserialize;
 
 const REGISTRY_API: &str = "https://api.github.com/repos/healdep/shim-registry/contents";
 
@@ -21,9 +20,10 @@ pub async fn search_registry(crate_name: &str) -> Option<String> {
     if res.status().is_success() {
         let contents: Vec<GithubContent> = res.json().await.ok()?;
         if let Some(folder) = contents.first() {
-            // Возвращаем имя первого shim-крейта как индикатор наличия решения
+            // Р’РѕР·РІСЂР°С‰Р°РµРј РёРјСЏ РїРµСЂРІРѕРіРѕ shim-РєСЂРµР№С‚Р° РєР°Рє РёРЅРґРёРєР°С‚РѕСЂ РЅР°Р»РёС‡РёСЏ СЂРµС€РµРЅРёСЏ
             return Some(folder.name.clone());
         }
     }
     None
 }
+
