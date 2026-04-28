@@ -82,7 +82,7 @@ docker run -p 5000:5000 ghcr.io/nersisiian/healdep:v0.1.0
 | Main page | Conflict analysis |
 |-----------|-------------------|
 | ![Dashboard main](docs/images/dashboard-main.png) | ![Dashboard analyze](docs/images/dashboard-analyze.png) |
-``
+
 
 ## 📦 Package Ecosystem
 
