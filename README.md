@@ -39,35 +39,33 @@ cd healdep
 cargo build --release
 ./target/release/healdep analyze examples/demo_app/Cargo.toml
 ./target/release/healdep heal examples/demo_app/Cargo.toml
+```
 
-```
-With AI (requires Ollama or OpenAI key)
-```
+### With AI (requires Ollama or OpenAI key)
+```bash
 # Ollama
 ollama pull codellama:7b
 ./target/release/healdep heal examples/demo_app/Cargo.toml --ai
+```
 
-```
-Python & npm
-```
+### Python & npm
+```bash
 python python/healdep_python.py analyze requirements.txt
 python python/healdep_npm.py heal package.json --ai
-
-
 ```
-🌐 Web Dashboard
-```
+
+## 🌐 Web Dashboard
+```bash
 python python/server.py
 # Open http://localhost:5000
-
-
 ```
-🐳 Docker
-```
+
+## 🐳 Docker
+```bash
 docker pull ghcr.io/nersisiian/healdep:v0.1.0
 docker run -p 5000:5000 ghcr.io/nersisiian/healdep:v0.1.0
-
 ```
+
 ## 🖼️ Screenshots
 
 ### Rust CLI
@@ -84,28 +82,27 @@ docker run -p 5000:5000 ghcr.io/nersisiian/healdep:v0.1.0
 | Main page | Conflict analysis |
 |-----------|-------------------|
 | ![Dashboard main](docs/images/dashboard-main.png) | ![Dashboard analyze](docs/images/dashboard-analyze.png) |
-```
-
-```
-## 📦 Package Ecosystem
 ``
+
+## 📦 Package Ecosystem
+
 | Language | File | Command |
 |----------|------|---------|
 | Rust | `Cargo.toml` | `healdep analyze` / `heal` |
 | Python | `requirements.txt` | `python healdep_python.py analyze` / `heal` |
 | npm | `package.json` | `python healdep_npm.py analyze` / `heal` |
 
-``
+
 ## 🧪 CI/CD Integration
-`
+
 HealDep includes ready‑to‑use GitHub Actions workflows:
-`
+
 - `ci.yml` – lint, test, build, and publish Docker image
 - `healdep-action.yml` – auto‑heal dependencies on push
 - `dependabot-heal.yml` – automatically heal PRs opened by Dependabot
-````
 
-``
+
 ## 📜 License
 
 MIT © 2025 [Nersisiian](https://github.com/Nersisiian)
+
