@@ -40,8 +40,6 @@ cargo build --release
 ./target/release/healdep analyze examples/demo_app/Cargo.toml
 ./target/release/healdep heal examples/demo_app/Cargo.toml
 
----
-
 ```
 With AI (requires Ollama or OpenAI key)
 ```
@@ -69,8 +67,6 @@ python python/server.py
 docker pull ghcr.io/nersisiian/healdep:v0.1.0
 docker run -p 5000:5000 ghcr.io/nersisiian/healdep:v0.1.0
 
----
-
 ```
 🖼️ Screenshots
 Rust CLI
@@ -90,8 +86,6 @@ Container launch	Dashboard in Docker
 https://docs/images/docker-up.png	https://docs/images/docker-dashboard.png
 ```
 
----
-
 ```
 ## 📦 Package Ecosystem
 ``
@@ -100,8 +94,6 @@ https://docs/images/docker-up.png	https://docs/images/docker-dashboard.png
 | Rust | `Cargo.toml` | `healdep analyze` / `heal` |
 | Python | `requirements.txt` | `python healdep_python.py analyze` / `heal` |
 | npm | `package.json` | `python healdep_npm.py analyze` / `heal` |
-
----
 
 ``
 ## 🧪 CI/CD Integration
@@ -112,7 +104,6 @@ HealDep includes ready‑to‑use GitHub Actions workflows:
 - `healdep-action.yml` – auto‑heal dependencies on push
 - `dependabot-heal.yml` – automatically heal PRs opened by Dependabot
 ````
----
 
 ``
 ## 📜 License
