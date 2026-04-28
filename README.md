@@ -69,6 +69,7 @@ docker run -p 5000:5000 ghcr.io/nersisiian/healdep:v0.1.0
 
 ```
 🖼️ Screenshots
+```
 Rust CLI
 Analyze	Heal
 https://docs/images/rust-analyze.png	https://docs/images/rust-heal.png
