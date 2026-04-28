@@ -68,23 +68,32 @@ docker pull ghcr.io/nersisiian/healdep:v0.1.0
 docker run -p 5000:5000 ghcr.io/nersisiian/healdep:v0.1.0
 
 ```
-🖼️ Screenshots
-```
-Rust CLI
-Analyze	Heal
-https://docs/images/rust-analyze.png	https://docs/images/rust-heal.png
-Python CLI
-Analyze	Heal
-https://docs/images/python-analyze.png	https://docs/images/python-heal.png
-npm CLI
-Analyze	Heal
-https://docs/images/npm-analyze.png	https://docs/images/npm-heal.png
-Web Dashboard
-Main page	Conflict analysis
-https://docs/images/dashboard-main.png	https://docs/images/dashboard-analyze.png
-Docker
-Container launch	Dashboard in Docker
-https://docs/images/docker-up.png	https://docs/images/docker-dashboard.png
+## 🖼️ Screenshots
+``
+### Rust CLI
+| Analyze | Heal |
+|--------|------|
+| ![Rust analyze](docs/images/rust-analyze.png) | ![Rust heal](docs/images/rust-heal.png) |
+
+### Python CLI
+| Analyze | Heal |
+|--------|------|
+| ![Python analyze](docs/images/python-analyze.png) | ![Python heal](docs/images/python-heal.png) |
+
+### npm CLI
+| Analyze | Heal |
+|--------|------|
+| ![npm analyze](docs/images/npm-analyze.png) | ![npm heal](docs/images/npm-heal.png) |
+
+### Web Dashboard
+| Main page | Conflict analysis |
+|-----------|-------------------|
+| ![Dashboard main](docs/images/dashboard-main.png) | ![Dashboard analyze](docs/images/dashboard-analyze.png) |
+
+### Docker
+| Container launch | Dashboard in Docker |
+|-----------------|----------------------|
+| ![Docker up](docs/images/docker-up.png) | ![Docker dashboard](docs/images/docker-dashboard.png) |
 ```
 
 ```
