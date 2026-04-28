@@ -39,61 +39,82 @@ cd healdep
 cargo build --release
 ./target/release/healdep analyze examples/demo_app/Cargo.toml
 ./target/release/healdep heal examples/demo_app/Cargo.toml
+
+---
+
+```
 With AI (requires Ollama or OpenAI key)
-bash
+```
 # Ollama
 ollama pull codellama:7b
 ./target/release/healdep heal examples/demo_app/Cargo.toml --ai
+
+```
 Python & npm
-bash
+```
 python python/healdep_python.py analyze requirements.txt
 python python/healdep_npm.py heal package.json --ai
+
+
+```
 🌐 Web Dashboard
-bash
+```
 python python/server.py
 # Open http://localhost:5000
+
+
+```
 🐳 Docker
-bash
+```
 docker pull ghcr.io/nersisiian/healdep:v0.1.0
 docker run -p 5000:5000 ghcr.io/nersisiian/healdep:v0.1.0
+
+---
+
+```
 🖼️ Screenshots
 Rust CLI
-AnalyzeHeal
-https://docs/images/rust-analyze.pnghttps://docs/images/rust-heal.png
+Analyze	Heal
+https://docs/images/rust-analyze.png	https://docs/images/rust-heal.png
 Python CLI
-AnalyzeHeal
-https://docs/images/python-analyze.pnghttps://docs/images/python-heal.png
+Analyze	Heal
+https://docs/images/python-analyze.png	https://docs/images/python-heal.png
 npm CLI
-AnalyzeHeal
-https://docs/images/npm-analyze.pnghttps://docs/images/npm-heal.png
+Analyze	Heal
+https://docs/images/npm-analyze.png	https://docs/images/npm-heal.png
 Web Dashboard
-Main pageConflict analysis
-https://docs/images/dashboard-main.pnghttps://docs/images/dashboard-analyze.png
+Main page	Conflict analysis
+https://docs/images/dashboard-main.png	https://docs/images/dashboard-analyze.png
 Docker
-Container launchDashboard in Docker
-https://docs/images/docker-up.pnghttps://docs/images/docker-dashboard.png
-🤖 AI Providers
-HealDep supports multiple AI backends for intelligent adapter generation.
-Configure healdep.toml:
+Container launch	Dashboard in Docker
+https://docs/images/docker-up.png	https://docs/images/docker-dashboard.png
+```
 
-toml
-[ai]
-provider = "ollama"           # or "openai"
-ollama_model = "codellama:7b"
-# openai_api_key = "sk-..."
-📦 Package Ecosystem
-LanguageFileCommand
-RustCargo.tomlhealdep analyze / heal
-Pythonrequirements.txtpython healdep_python.py analyze / heal
-npmpackage.jsonpython healdep_npm.py analyze / heal
-🧪 CI/CD Integration
+---
+
+```
+## 📦 Package Ecosystem
+``
+| Language | File | Command |
+|----------|------|---------|
+| Rust | `Cargo.toml` | `healdep analyze` / `heal` |
+| Python | `requirements.txt` | `python healdep_python.py analyze` / `heal` |
+| npm | `package.json` | `python healdep_npm.py analyze` / `heal` |
+
+---
+
+``
+## 🧪 CI/CD Integration
+`
 HealDep includes ready‑to‑use GitHub Actions workflows:
+`
+- `ci.yml` – lint, test, build, and publish Docker image
+- `healdep-action.yml` – auto‑heal dependencies on push
+- `dependabot-heal.yml` – automatically heal PRs opened by Dependabot
+````
+---
 
-ci.yml – lint, test, build, and publish Docker image
+``
+## 📜 License
 
-healdep-action.yml – auto‑heal dependencies on push
-
-dependabot-heal.yml – automatically heal PRs opened by Dependabot
-
-📜 License
-MIT © 2025 Nersisiian
+MIT © 2025 [Nersisiian](https://github.com/Nersisiian)
